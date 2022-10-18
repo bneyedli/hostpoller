@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "hostpoller"
+version = "0.1.0"
+description = "Record results of http requests to a given host over a specified period"
+authors = ["Bryan Neyedli"]
+license = "BSD"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.11"
+argparse = "^1.4.0"
+requests = "^2.28.1"
+SQLAlchemy = "^1.4.41"
+python-dateutil = "^2.8.2"
+pandas = "^1.5.0"
+plotly = "^5.10.0"
+Werkzeug = "^2.2.2"
+Flask = "^2.2.2"
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.10.0"
+isort = "^5.10.1"
+bandit = "^1.7.4"
+semgrep = "^0.117.0"
+pylint = "^2.15.4"
+flake8 = "^5.0.4"
+mypy = "^0.982"
+pytype = "^2022.9.27"
+types-requests = "^2.28.11.2"
+types-python-dateutil = "^2.8.19"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+ignore_missing_imports = true

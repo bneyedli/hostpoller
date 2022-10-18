@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+ <body>
+ <h1>Host status for {{ host }}</h1>
+   <div id='chart' class='chart'”></div>
+</body>
+<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+<script type='text/javascript'>
+  var graphs = {{subplots | safe}};
+  Plotly.plot('chart',graphs,{});
+</script>
+<body>
+  <h2>Host selection:</h2>
+  <h3><table><form action="{{post_action}}" method="GET">
+    <td>
+      <label>Observed hosts:</label>
+        <select name="host_selection" width="300px">
+          {% for host in host_list %}
+          <option value="{{ host }}"{% if loop.first %} SELECTED{% endif %}>{{ host }}</option>
+          {% endfor %}
+        </select>
+        <input type="submit" value="Submit">
+    </td>
+  </form></table></h3>
+</body>
+</html>
+

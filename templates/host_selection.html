@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>{{ title }}</title>
+  </head>
+  <body>
+      <h2>Host selector</h2>
+        <h3><table><form action="{{post_action}}" method="GET">
+          <td>
+          <label>Observed hosts:</label>
+            <select name="host_selection" width="300px">
+		{% for host in host_list %}
+		<option value="{{ host }}"{% if loop.first %} SELECTED{% endif %}>{{ host }}</option>
+		{% endfor %}
+            </select>
+	    <input type="submit" value="Submit">
+          </td>
+
+        </form></table></h3>
+  </body>
+</html>
+

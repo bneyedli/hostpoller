@@ -1,0 +1,5 @@
+__version__ = "0.1.0"
+__author__ = "Bryan Neyedli"
+__email__ = "bryan@bledsol.net"
+__url__ = "https://github.com/bneyedli/hostpoller"
+__doc__ = "Web Host Poller"
