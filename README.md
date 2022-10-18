@@ -3,7 +3,7 @@ Simple python service to poll a given host and path, record results in a sqlite 
 
 # Minimum Requirements
 * Docker
-* Developed with python [poetry](https://python-poetry.org/), [plotly](https://plotly.com), [flask](https://palletsprojects.com/p/flask/), [pre-commit](https://pre-commit.com) and local [hooks](https://github.com/bneyedli/pre-commit-hook)
+* Developed with python [poetry](https://python-poetry.org/), [plotly](https://plotly.com), [flask](https://palletsprojects.com/p/flask/), [sqlalchemy](https://sqlalchemy.org), [pre-commit](https://pre-commit.com) and local [hooks](https://github.com/bneyedli/pre-commit-hook)
 
 ## Dockerless requirements
 * make
