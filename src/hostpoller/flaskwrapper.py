@@ -27,7 +27,10 @@ class FlaskWrapper:
         self.table = table
         self.logger = logging.getLogger(__name__)
         self.flask_app = Flask(
-            app_meta["name"], static_url_path="/public", static_folder="./public"
+            app_meta["name"],
+            static_url_path="/public",
+            static_folder="./public",
+            template_folder="templates",
         )
         self.flask_app.config["JSON_SORT_KEYS"] = False
         self.requests: dict = {}

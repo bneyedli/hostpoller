@@ -3,7 +3,13 @@ Simple python service to poll a given host and path, record results in a sqlite 
 
 # Minimum Requirements
 * Docker
-* Developed with python [poetry](https://python-poetry.org/), [pre-commit](https://pre-commit.com) and local [hooks](https://github.com/bneyedli/pre-commit-hook)
+* Developed with python [poetry](https://python-poetry.org/), [pre-commit](https://pre-commit.com), [Plotly](https://plotly.com), [Flask](https://palletsprojects.com/p/flask/) and local [hooks](https://github.com/bneyedli/pre-commit-hook)
+## Dockerless requirements
+* make
+* pip
+```
+make deps
+```
 
 ## Usage -- standalone
 ```
@@ -30,18 +36,18 @@ options:
   --sql-db-path SQL_DB_PATH
                         SQL Engine, default: hostpoller.db
 ```
-Example: Query https://www.github.com/bneyedli
+Example: Query https://www.github.com/
 ```
-./src/hostpoller/poller.py --target https://www.github.com/bneyedli --polling-frequency .5 --request-timeout 5 
+./src/hostpoller/poller.py --target https://www.github.com/ --polling-frequency .5 --request-timeout 5 
 ```
 ## Usage -- Docker
 Build and run container all in one
 ```
-make build run TARGET=https://www.github.com/bneyedli 
+make build run TARGET=https://www.github.com/
 ```
 Run existing container
 ```
-make run TARGET=https://www.github.com/bneyedli
+make run TARGET=https://www.github.com/
 ```
 
 ## Frontend

@@ -23,7 +23,8 @@ pytype.cfg:
 
 build:
 	@echo "Building container: $(IMAGE_NAME) Listen port: $(LISTEN_PORT)"
-	@docker build . --no-cache \
+	#@docker build . #--no-cache
+	@docker build . \
 		--build-arg SOURCE_CONTAINER_TAG=$(SOURCE_CONTAINER_TAG) \
 		--build-arg PROJECT_NAME=$(PROJECT_NAME) \
 		--build-arg LISTEN_IP=$(LISTEN_IP) \
@@ -46,3 +47,12 @@ run:
 
 inspect:
 	@docker inspect $(IMAGE_NAME) | jq .
+
+requirements.txt:
+	@poetry export -o requirements.txt
+
+deps: requirements.txt
+	@pip install -r $^
+
+../$(PROJECT_NAME).tgz:
+	@tar --exclude='.git' --exclude=".pre-commit-*" --exclude="poetry.lock" --exclude="*__pycache__" -czvf $^ ./

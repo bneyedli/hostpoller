@@ -8,12 +8,12 @@ WORKDIR /usr/local/src/${PROJECT_NAME}
 RUN python -m pip install --upgrade pip && pip install poetry
 RUN useradd -m ${PROJECT_NAME}
 RUN poetry export -o /tmp/logparser-requirements.txt
-RUN apt update && apt -y install strace
 USER ${PROJECT_NAME}
 ENV PATH="${PATH}:${HOME}/.local/bin"
 RUN pip install -r /tmp/logparser-requirements.txt
 ARG TARGET MONITOR_PERIOD POLLING_FREQUENCY REQUEST_TIMEOUT TARGET
 WORKDIR /home/${PROJECT_NAME}
-COPY templates/ ./templates
+COPY templates templates
+ENV PYTHONPATH=${PYTHONPATH}:/usr/local/src/${PROJECT_NAME}
 CMD /usr/local/src/${PROJECT_NAME}/poller.py --listen-ip ${LISTEN_IP} --listen-port ${LISTEN_PORT} --monitor-period ${MONITOR_PERIOD} --polling-frequency ${POLLING_FREQUENCY} --request-timeout ${REQUEST_TIMEOUT} --target ${TARGET}
 EXPOSE ${LISTEN_PORT}/tcp
