@@ -1,0 +1,18 @@
+repos:
+- repo: git@github.com:bneyedli/pre-commit-hooks
+  rev: f277953fd6de4cb62f4a1b04b74b6b5cb90e3edf
+  hooks:
+    - id: python-bandit
+    - id: python-black
+    - id: python-flake8
+    - id: python-isort
+    - id: python-pylint
+    - id: python-semgrep
+    - id: sh-shellcheck
+
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.3.0
+  hooks:
+    - id: check-merge-conflict
+    - id: check-json
+    - id: check-yaml
