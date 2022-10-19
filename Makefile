@@ -58,4 +58,4 @@ deps: requirements.txt .git/hooks/pre-commit pytype.cfg
 	@pip install -r $^
 
 ../$(PROJECT_NAME).tgz:
-	@tar --exclude='.git' --exclude=".pre-commit-*" --exclude="poetry.lock" --exclude="*__pycache__" -czvf $^ ./
+	@tar --exclude='.git*' --exclude="*.db" --exclude=".pre-commit-*" --exclude="poetry.lock" --exclude="*__pycache__" -czvf $@ ./

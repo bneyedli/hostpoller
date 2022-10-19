@@ -14,7 +14,8 @@ make deps
 
 ## Usage -- standalone
 ```
- ./src/hostpoller/poller.py --help                                                                                                                                                                                                                                                                             ✔  0.79 L  2s ─╯
+ ./src/hostpoller/poller.py --help
+
 usage: poller.py [-h] [--target TARGET] [--monitor-period MONITOR_PERIOD] [--polling-frequency POLLING_FREQUENCY] [--request-timeout REQUEST_TIMEOUT] [--listen-ip LISTEN_IP] [--listen-port LISTEN_PORT] [--sql-engine SQL_ENGINE] [--sql-db-path SQL_DB_PATH]
 
 Monitor host and store results.
@@ -23,7 +24,7 @@ options:
   -h, --help            show this help message and exit
   --target TARGET       Host or ip to target and path, default: https://127.0.0.1/
   --monitor-period MONITOR_PERIOD
-                        Time in seconds to monitor given host, default: 10
+                        Time in seconds to monitor host, 0 will run forever default: 10
   --polling-frequency POLLING_FREQUENCY
                         Time in seconds to poll given host over specified period, default: 1
   --request-timeout REQUEST_TIMEOUT
@@ -36,6 +37,7 @@ options:
                         SQL Engine, default: sqlite
   --sql-db-path SQL_DB_PATH
                         SQL Engine, default: hostpoller.db
+
 ```
 Example: Query https://www.github.com/
 ```
