@@ -18,6 +18,9 @@ PYTHONPATH=src/hostpoller/
 
 export PYTHONPATH
 
+.git/hooks/pre-commit:
+	@pre-commit install
+
 pytype.cfg:
 	@poetry run pytype --generate-config pytype.cfg
 
@@ -51,7 +54,7 @@ inspect:
 requirements.txt:
 	@poetry export -o requirements.txt
 
-deps: requirements.txt
+deps: requirements.txt .git/hooks/pre-commit pytype.cfg
 	@pip install -r $^
 
 ../$(PROJECT_NAME).tgz:

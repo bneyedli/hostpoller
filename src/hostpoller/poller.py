@@ -106,7 +106,12 @@ class Poller:
         """
         time_start = int(time())
         time_stop = time_start + self.target_meta["monitor_period"]
-        logger.info("Polling target")
+        if self.target_meta["monitor_period"] == 0:
+            logger.info("Polling target indefinitely")
+        else:
+            logger.info(
+                "Polling target for %s seconds", self.target_meta["monitor_period"]
+            )
         while True:
             request_response = self.make_request()
 
@@ -177,7 +182,7 @@ if __name__ == "__main__":
         {
             "switch": "--monitor-period",
             "default": 10,
-            "help": "Time in seconds to monitor given host, default: 10",
+            "help": "Time in seconds to monitor host, 0 will run forever default: 10",
             "type": int,
         },
         {
@@ -235,34 +240,33 @@ if __name__ == "__main__":
     poller_thread = Thread(target=poller.start, daemon=True)
     poller_thread.start()
 
-    flask_endpoints = [
-        {
-            "path": "/",
-            "name": "doc_root",
-            "handler": "self.doc_root",
-            "methods": ["GET"],
-        },
-        {
-            "path": "/dashboard",
-            "name": "dashboard",
-            "handler": "self.dashboard_endpoint",
-            "methods": ["GET", "POST"],
-        },
-    ]
-
     flask_meta = {
         "name": app_metadata["name"],
         "listen_ip": args.listen_ip,
         "listen_port": args.listen_port,
-        "endpoints": flask_endpoints,
     }
     flask_app = FlaskWrapper(
         flask_meta,
         response_log,
     )
 
+    flask_endpoints = [
+        {
+            "path": "/",
+            "name": "doc_root",
+            "handler": flask_app.doc_root,
+            "methods": ["GET"],
+        },
+        {
+            "path": "/dashboard",
+            "name": "dashboard",
+            "handler": flask_app.dashboard_endpoint,
+            "methods": ["GET", "POST"],
+        },
+    ]
+
     logger.info("Starting flask")
-    flask = Thread(target=flask_app.start)
+    flask = Thread(target=flask_app.start, args=(flask_endpoints,))
     flask.daemon = True
     flask.start()
 

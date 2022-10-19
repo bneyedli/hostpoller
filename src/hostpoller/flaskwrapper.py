@@ -37,20 +37,20 @@ class FlaskWrapper:
         self.listen_ip = app_meta["listen_ip"]
         self.listen_port = app_meta["listen_port"]
         self.logger.info("Initializing FlaskWrapper")
-        self.endpoints = app_meta["endpoints"]
+        self.endpoints = []
 
-        for endpoint in self.endpoints:
-            self.add_endpoint(
-                endpoint["name"],
-                endpoint["path"],
-                eval(endpoint["handler"]),  # nosec - fixme pylint: disable=eval-used
-                endpoint["methods"],
-            )
-
-    def start(self) -> None:
+    def start(self, endpoints: list) -> None:
         """
         Serve flask app on acquired host and port
         """
+        for endpoint in endpoints:
+            self.endpoints.append(endpoint)
+            self.add_endpoint(
+                endpoint["name"],
+                endpoint["path"],
+                endpoint["handler"],
+                endpoint["methods"],
+            )
         self.flask_app.run(debug=False, host=self.listen_ip, port=self.listen_port)
         self.logger.info(dir(self.flask_app))
 
